@@ -2,26 +2,26 @@ using UnityEngine;
 
 public class CounterInputBinder : MonoBehaviour
 {
-    [SerializeField] private GameplayInputHandler _inputHandler;
+    [SerializeField] private InputActionHandler _inputActionHandler;
     [SerializeField] private Counter _counter;
 
     private void OnEnable()
     {
-        if (_inputHandler != null && _counter != null)
+        if (_inputActionHandler != null && _counter != null)
         {
-            _inputHandler.PrimaryActionPerformed += OnPrimaryActionPerformed;
+            _inputActionHandler.ActionTriggered += HandleActionTriggered;
         }
     }
 
     private void OnDisable()
     {
-        if (_inputHandler != null && _counter != null)
+        if (_inputActionHandler != null && _counter != null)
         {
-            _inputHandler.PrimaryActionPerformed -= OnPrimaryActionPerformed;
+            _inputActionHandler.ActionTriggered -= HandleActionTriggered;
         }
     }
 
-    private void OnPrimaryActionPerformed()
+    private void HandleActionTriggered()
     {
         _counter.ToggleCounting();
     }

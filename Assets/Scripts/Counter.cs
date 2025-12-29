@@ -54,7 +54,7 @@ public class Counter : MonoBehaviour
 
     private System.Collections.IEnumerator CountingRoutine()
     {
-        while (true)
+        while (_isCounting)
         {
             yield return _waitInterval;
 

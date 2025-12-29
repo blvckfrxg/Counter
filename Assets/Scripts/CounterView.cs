@@ -17,7 +17,7 @@ public class CounterView : MonoBehaviour
     {
         if (_counter != null)
         {
-            _counter.CountChanged += UpdateCounterDisplay;
+            _counter.CountChanged += HandleCountChanged;
         }
     }
 
@@ -25,11 +25,11 @@ public class CounterView : MonoBehaviour
     {
         if (_counter != null)
         {
-            _counter.CountChanged -= UpdateCounterDisplay;
+            _counter.CountChanged -= HandleCountChanged;
         }
     }
 
-    private void UpdateCounterDisplay(int count)
+    private void HandleCountChanged(int count)
     {
         if (_counterText != null)
         {

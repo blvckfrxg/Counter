@@ -3,12 +3,13 @@ using UnityEngine;
 
 public class Counter : MonoBehaviour
 {
-    public event Action<int> OnCountChanged;
+    public event Action CountingToggled;
+    public event Action<int> CountChanged;
 
     [SerializeField] private float _countInterval = 0.5f;
 
-    private int _count;
-    private bool _isRunning;
+    private int _currentCount;
+    private bool _isCounting;
     private Coroutine _countingCoroutine;
     private WaitForSeconds _waitInterval;
 
@@ -19,9 +20,10 @@ public class Counter : MonoBehaviour
 
     public void ToggleCounting()
     {
-        _isRunning = !_isRunning;
+        _isCounting = !_isCounting;
+        CountingToggled?.Invoke();
 
-        if (_isRunning)
+        if (_isCounting)
         {
             StartCounting();
         }
@@ -52,15 +54,12 @@ public class Counter : MonoBehaviour
 
     private System.Collections.IEnumerator CountingRoutine()
     {
-        while (_isRunning)
+        while (true)
         {
             yield return _waitInterval;
 
-            if (_isRunning)
-            {
-                _count++;
-                OnCountChanged?.Invoke(_count);
-            }
+            _currentCount++;
+            CountChanged?.Invoke(_currentCount);
         }
     }
 }

@@ -17,7 +17,7 @@ public class CounterView : MonoBehaviour
     {
         if (_counter != null)
         {
-            _counter.OnCountChanged += UpdateCounterDisplay;
+            _counter.CountChanged += UpdateCounterDisplay;
         }
     }
 
@@ -25,7 +25,7 @@ public class CounterView : MonoBehaviour
     {
         if (_counter != null)
         {
-            _counter.OnCountChanged -= UpdateCounterDisplay;
+            _counter.CountChanged -= UpdateCounterDisplay;
         }
     }
 
@@ -35,7 +35,5 @@ public class CounterView : MonoBehaviour
         {
             _counterText.text = count.ToString();
         }
-
-        Debug.Log($"—четчик: {count}");
     }
 }
